@@ -18,11 +18,11 @@ class EmployeeForm(forms.ModelForm):
 
         super(EmployeeForm, self).__init__(*args, **kwargs)
         self.fields['employees'].required = False
-
-        if self.instance.id:
+        if self.instance.id:            
             children_queryset = self.employees = Employee.objects.exclude(id=self.instance.id).filter(Q(parent=self.instance) | Q(parent__isnull=True))
             if self.instance.parent:
                 children_queryset = children_queryset.exclude(id=self.instance.parent.id)
+            self.fields['parent'].queryset = self.fields['parent'].queryset.exclude(id=self.instance.id)
             self.fields['employees'].queryset= children_queryset
             self.fields['employees'].initial = self.instance.children
         else:
