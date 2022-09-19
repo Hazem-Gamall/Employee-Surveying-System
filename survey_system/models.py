@@ -20,14 +20,13 @@ class Survey(models.Model):
         (SURVEY_TYPE_REVERSE, 'Reverse'),
         (SURVEY_TYPE_GENERAL, 'General'),
     ]
-
+    title = models.CharField(max_length=50)
     survey_type = models.CharField(
         max_length=1, choices=SURVEY_TYPE_CHOICES, default=SURVEY_TYPE_FOLLOWERS)
-    end_date = models.DateField()
     start_date = models.DateField() 
+    end_date = models.DateField()
     description = models.TextField(blank=True, null=True)
     questions = models.ManyToManyField(Questions)
-    title = models.CharField(max_length=50)
 
 
     @property
