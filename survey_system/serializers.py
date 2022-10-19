@@ -24,6 +24,7 @@ class EmployeeSurveySerializer(serializers.ModelSerializer):
     rater = serializers.StringRelatedField()
     get_rated = serializers.StringRelatedField()
     answers = AnswerSerializer(many=True)
+    survey = SurveySerializer()
     class Meta:
         model = EmployeeSurvey
         fields = ['id','is_submitted', 'rater', 'get_rated', 'survey', 'submited_date', 'answers']

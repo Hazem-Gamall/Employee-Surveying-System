@@ -32,12 +32,12 @@ class SurveyViewSet(RetrieveModelMixin,
 
     @action(detail=True, methods=['GET', 'POST', 'PATCH'], permission_classes=[IsAuthenticated])
     def SubmitAnswer(self, request, pk):
-        if request.method == 'GET':
-            employee_survey = EmployeeSurvey.objects.get(pk=pk)
-            questions = employee_survey.survey.questions.all()
-            serializer = QuestionSerializer(questions, many=True)
-            return Response(serializer.data)
-        elif request.method == 'POST':
+        # if request.method == 'GET':
+        #     employee_survey = EmployeeSurvey.objects.get(pk=pk)
+        #     questions = employee_survey.survey.questions.all()
+        #     serializer = QuestionSerializer(questions, many=True)
+        #     return Response(serializer.data)
+        if request.method == 'POST':
             employee_object = self.request.user.employee
             employee_survey = employee_object.survey_set.get(id=pk)
             if employee_survey.survey.is_expired:
